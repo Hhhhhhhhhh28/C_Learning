@@ -1,0 +1,335 @@
+@use './variables.scss' as *;
+
+// 重置初始样式
+*:not(.markdown-container, .markdown-container *),
+*:after,
+*:before {
+  box-sizing: border-box;
+  outline: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  font-size: 10px;
+  height: 100%;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+body,
+div,
+span,
+applet,
+object,
+iframe,
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+summary,
+time,
+mark,
+audio,
+video {
+  font: inherit;
+  // font-size: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  vertical-align: baseline;
+
+  border: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+  height: 100vh;
+  background: var(--theme-page-bg, $main-bg-color);
+  color: var(--theme-text-primary, $text-color);
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+
+  &:before,
+  &:after {
+    content: '';
+    content: none;
+  }
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+
+  position: relative;
+
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+input,
+textarea,
+button {
+  font-family: inherit;
+  font-size: inherit;
+
+  color: inherit;
+}
+
+select {
+  text-indent: 0.01px;
+  text-overflow: '';
+
+  border: 0;
+  border-radius: 0;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+code,
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+// 在文件底部添加针对markdown容器的样式恢复
+.markdown-container {
+  height: auto;
+  background-color: var(--theme-panel-bg-strong, #ffffff);
+  margin: $margin-s 0;
+  padding: 0 $padding-xl;
+  border-radius: $border-radius-s;
+  * {
+    font: revert; // 恢复浏览器默认字体设置
+    // 恢复字体大小
+    font-size: 14px;
+    // 恢复字体颜色
+    color: inherit;
+  }
+  pre {
+    .code-actions {
+      padding: 0 $padding-xl;
+      background-color: var(--theme-card-bg, #f0f0f0); // 背景颜色;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+
+      button {
+        padding: 4px 8px;
+        border: none;
+        border-radius: 4px;
+        background-color: var(--theme-card-bg, #f0f0f0);
+        cursor: pointer;
+        &:nth-child(3) {
+          color: var(--theme-accent, $primary-color);
+        }
+      }
+      .language {
+        flex: 1;
+        font-weight: bold;
+        color: var(--theme-text-muted, rgb(176, 176, 176));
+      }
+    }
+  }
+  // 添加行高恢复
+  // line-height: 1.6;
+  ol,
+  ul {
+    list-style: disc; // 恢复列表符号
+    margin-left: 2em;
+    line-height: 1.6; // 列表项行高
+  }
+  // 恢复ol的样式
+  ol {
+    list-style-type: decimal;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: revert;
+    margin: 1em 0;
+    font-weight: bold; // 恢复标题加粗
+  }
+  // 添加具体字号设置（浏览器默认值）
+  h1 {
+    // font-size: 32px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 18.72px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+  h5 {
+    font-size: 13.28px;
+  }
+  h6 {
+    font-size: 10.72px;
+  }
+  // 针对特定元素调整
+  p {
+    line-height: 1.8;
+    margin: 1em 0;
+  }
+  code,
+  pre {
+    font-family: monospace;
+
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    line-height: 1.5; // 代码块行高稍密
+
+    max-width: 100%;
+    white-space: pre-wrap !important; /* 允许长单词换行 */
+    word-wrap: break-word !important; /* 强制换行 */
+    overflow: hidden;
+  }
+  code {
+    background: #f6f8fa;
+  }
+  // 可以根据需要继续添加其他需要保留的原始样式
+  // 保留表格原始样式
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+    box-shadow: none;
+
+    // 统一单元格样式
+    th,
+    td {
+      padding: 8px 12px;
+      border: 1px solid #dfe2e5;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    // 表头样式
+    th {
+      background-color: #f6f8fa;
+      font-weight: 600;
+    }
+
+    // 斑马纹效果
+    tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+  }
+  // 恢复引用块原始样式
+  blockquote {
+    border-left: 4px solid #ddd;
+    padding: 0 1em;
+    margin: 1em 0;
+    color: #777;
+  }
+  .error {
+    color: red;
+    font-weight: 600;
+  }
+}
